@@ -72,3 +72,71 @@ naraz już tak. To znaczy, że będą mogły istnieć seanse o tej samej wartoś
 seanse o tej samej wartości pól movie_id, natomiast nigdy nie wystąpi sytuacja, że dwa seanse mają te same wartości
 w obu polach.
 """
+
+
+
+CREATE TABLE users (
+    users_id SERIAL,
+    name VARCHAR(60),
+    email VARCHAR(60),
+    password VARCHAR(60),
+    PRIMARY KEY(id)
+);
+
+CREATE TABLE messages (
+    messages_id SERIAL,
+    user_id INTEGER,
+    message TEXT,
+    PRIMARY KEY(messages_id),
+    FOREIGN KEY(users_id) REFERENCES users(users_id) ON DELETE CASCADE
+);
+
+CREATE TABLE items(
+    item_id SERIAL,
+    name VARCHAR(40),
+    description TEXT,
+    price DECIMAL(7,2),
+    PRIMARY KEY(item_id),
+);
+
+CREATE TABLE orders(
+    order_id SERIAL,
+    description TEXT,
+    PRIMARY KEY(order_id)
+);
+
+# Stworzenie relacji wiele do wielu między tabelami Items a Orders
+(tabela ma się nazywać ItemsOrders, a pola relacji item_id i order_id).
+
+
+CREATE TABLE items_orders(
+  id serial NOT NULL,
+  item_id int NOT NULL,
+  order_id int NOT NULL,
+  PRIMARY KEY(id),
+  FOREIGN KEY(order_id) REFERENCES orders(order_id),
+  FOREIGN KEY(item_id) REFERENCES items(item_id)
+);
+
+SELECT * FROM orders JOIN items_orders ON orders.order_id=items_orders.order_id JOIN items ON items.item_id=items_orders.item_id;
+
+
+# Wybranie wszystkich itemów o cenie większej niż 13
+
+SELECT * FROM items WHERE price > 13;
+
+
+#Włożenie do tabeli Orders nowego zamówienia o opisie "przykładowy opis"
+INSERT INTO orders  VALUES (DEFAULT,' dowolny opis');
+
+
+# usuniecie uzytkownika o id 7
+
+DELETE FROM users WHERE id = 7 ;
+
+
+# Wybranie wszystkich użytkowników z tabeli Users, którzy mają przypisaną jakąś wiadomość
+ w tabeli Messages.
+
+SELECT * FROM users JOIN messages ON users.users_id=messages.messages_id;
+
