@@ -21,7 +21,7 @@ def execute_sql(sql):
 
     cursor.execute(sql)
     try:
-        result = cursor.fetchall()
+        result = cursor.fetchall()    # sprawdz wszystko
     except ProgrammingError:
         result = None
 
