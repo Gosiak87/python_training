@@ -13,8 +13,8 @@ class Dice:
             self.dice_type = 10
 
     def roll(self):
-        rzut = randint(1, self.dice_type)
-        return rzut
+        throw = randint(1, self.dice_type)
+        return throw
 
 
 def roll(dice_type=3):
@@ -22,9 +22,9 @@ def roll(dice_type=3):
     for i in range(10):
         yield dice.roll()
 
-#kostka = Dice(100)
+#cubes = Dice(100)
 #for i in range(10):
- #   print(kostka.roll())
+ #   print(cubes.roll())
 gen = roll(12)
 
 for result in gen:
