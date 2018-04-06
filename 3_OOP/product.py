@@ -45,7 +45,7 @@ class ShoppingCart:
     def change_product_quantity(self, product_id, new_quantity):
         if product_id in self.products:
             product = self.products[product_id]
-            product.quantity = new quantity
+            product.quantity = new_quantity
            # self.products[product_id].quantity = new_quantity  # wyciagamy ze slownika  product id
 
     def print_receipt(self):
@@ -69,8 +69,7 @@ b = Product("Lalka", "dla dzieci", 15, 6)
 
 
 print(a.get_id())
-wynik = b.get_id()
-print(wynik)
+print(b.get_id())
 print(a.get_total_sum())
 print(b.get_total_sum())
 
